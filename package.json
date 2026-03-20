@@ -1,0 +1,24 @@
+# n-verify-protocol
+
+Decentralized AI verification layer built with Next.js, Node.js, and Solidity.
+
+## Quick Start
+
+```bash
+# Install
+npm install
+
+# Development
+npm run dev
+
+# Build
+npm run build
+```
+
+## Documentation
+
+See the main README.md for full documentation.
+
+## License
+
+MIT

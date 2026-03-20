@@ -1,0 +1,16 @@
+{
+  "name": "n-verify-backend",
+  "version": "1.0.0",
+  "description": "N-Verify Protocol Backend",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest"
+  },
+  "keywords": ["n-verify", "ai", "verification", "blockchain"],
+  "author": "N-Verify Team",
+  "license": "MIT"
+}

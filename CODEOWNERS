@@ -1,0 +1,16 @@
+# N-Verify Protocol - CODEOWNERS
+
+# Default owners for everything in the repo
+* @nath10-dev
+
+# Backend
+/backend @nath10-dev
+
+# Frontend  
+/frontend @nath10-dev
+
+# Contracts
+/contracts @nath10-dev
+
+# Documentation
+/docs @nath10-dev
