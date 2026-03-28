@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
 
-const api = axios.create({
-  baseURL: `${API_URL}/api/v1`,
+const apiClient = axios.create({
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 // Add auth token to requests
-api.interceptors.request.use((config) => {
+apiClient.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -21,12 +21,12 @@ api.interceptors.request.use((config) => {
 });
 
 // Handle auth errors
-api.interceptors.response.use(
+apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
         window.location.href = '/login';
       }
     }
@@ -34,67 +34,103 @@ api.interceptors.response.use(
   }
 );
 
-// Auth API
+// ==================== Auth API ====================
+
 export const authAPI = {
-  register: (data: { email: string; password: string; organizationName?: string; role?: string }) =>
-    api.post('/auth/register', data),
-  
-  login: (data: { email: string; password: string }) =>
-    api.post('/auth/login', data),
-  
-  refresh: () =>
-    api.post('/auth/refresh'),
-  
-  me: () =>
-    api.get('/auth/me'),
+  register: async (email: string, password: string, name: string) => {
+    const response = await apiClient.post('/auth/register', { email, password, name });
+    return response.data;
+  },
+
+  login: async (email: string, password: string) => {
+    const response = await apiClient.post('/auth/login', { email, password });
+    if (response.data.token) {
+      localStorage.setItem('authToken', response.data.token);
+    }
+    return response.data;
+  },
+
+  logout: () => {
+    localStorage.removeItem('authToken');
+  },
+
+  me: async () => {
+    const response = await apiClient.get('/auth/me');
+    return response.data;
+  },
 };
 
-// Verification API
-export const verifyAPI = {
-  create: (data: { domain: string; aiOutput: string; metadata?: object }) =>
-    api.post('/verify', data),
-  
-  get: (requestId: string) =>
-    api.get(`/verify/${requestId}`),
-  
-  list: (params?: { status?: string; domain?: string; limit?: number; offset?: number }) =>
-    api.get('/verify', { params }),
-  
-  getCertificate: (requestId: string) =>
-    api.get(`/verify/${requestId}/certificate`),
+// ==================== Verification API ====================
+
+export interface VerificationRequest {
+  domain: 'medical' | 'legal' | 'financial';
+  aiOutput: string;
+  context?: string;
+}
+
+export interface VerificationResult {
+  id: string;
+  certificateId: string;
+  reliabilityScore: string;
+  domain: string;
+  reasoningChain: any;
+  verificationDetails: any;
+  createdAt: string;
+}
+
+export const verificationAPI = {
+  create: async (data: VerificationRequest): Promise<VerificationResult> => {
+    const response = await apiClient.post('/verify', data);
+    return response.data;
+  },
+
+  list: async (): Promise<VerificationResult[]> => {
+    const response = await apiClient.get('/verify');
+    return response.data;
+  },
+
+  get: async (id: string): Promise<VerificationResult> => {
+    const response = await apiClient.get(`/verify/${id}`);
+    return response.data;
+  },
 };
 
-// Reasoning API
-export const reasoningAPI = {
-  getGraph: (graphId: string) =>
-    api.get(`/reasoning/${graphId}`),
-  
-  getNode: (graphId: string, nodeId: string) =>
-    api.get(`/reasoning/${graphId}/nodes/${nodeId}`),
+// ==================== Validator API ====================
+
+export const validatorAPI = {
+  register: async (walletAddress: string, domain: string) => {
+    const response = await apiClient.post('/validators/register', { walletAddress, domain });
+    return response.data;
+  },
+
+  getStatus: async (walletAddress: string) => {
+    const response = await apiClient.get(`/validators/${walletAddress}/status`);
+    return response.data;
+  },
+
+  stake: async (domain: string) => {
+    const response = await apiClient.post('/validators/stake', { domain });
+    return response.data;
+  },
 };
 
-// Validators API
-export const validatorsAPI = {
-  register: (data: { domain: string; walletAddress: string; stakeAmount: number }) =>
-    api.post('/validators/register', data),
-  
-  getStats: (validatorId: string) =>
-    api.get(`/validators/${validatorId}/stats`),
-  
-  verifyNode: (validatorId: string, data: { nodeId: string; result: string; confidence: number; evidence: unknown[] }) =>
-    api.post(`/validators/${validatorId}/verify-node`, data),
+// ==================== User API ====================
+
+export const userAPI = {
+  updateProfile: async (data: { name?: string; walletAddress?: string }) => {
+    const response = await apiClient.put('/users/profile', data);
+    return response.data;
+  },
+
+  getAPIKeys: async () => {
+    const response = await apiClient.get('/users/api-keys');
+    return response.data;
+  },
+
+  createAPIKey: async (name: string) => {
+    const response = await apiClient.post('/users/api-keys', { name });
+    return response.data;
+  },
 };
 
-// Analytics API
-export const analyticsAPI = {
-  dashboard: () =>
-    api.get('/analytics/dashboard'),
-  
-  domain: (domain: string) =>
-    api.get(`/analytics/domain/${domain}`),
-  
-  user: () =>
-    api.get('/analytics/user'),
-};
-
-export default api;
+export default apiClient;
