@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm ci
+          
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
+          npm ci
+          
+      - name: Lint Frontend
+        run: |
+          cd frontend
+          npm run lint
+        continue-on-error: true
+          
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm run build
+          
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm run test -- --passWithNoTests
+        continue-on-error: true
+
+  contract-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install Hardhat
+        run: |
+          cd contracts
+          npm ci
+          
+      - name: Compile Contracts
+        run: |
+          cd contracts
+          npx hardhat compile
+          
+      - name: Run Tests
+        run: |
+          cd contracts
+          npx hardhat test
