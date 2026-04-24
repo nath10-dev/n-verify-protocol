@@ -17,17 +17,103 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-/* Custom Animations */
+/* ============================================
+   ADVANCED ANIMATIONS & EFFECTS
+   ============================================ */
+
+/* Float Animation */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
 }
 
+/* Pulse Glow Animation */
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
 }
 
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* Glow Pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(14, 165, 233, 0.3), 0 0 15px rgba(34, 211, 238, 0.1); }
+  50% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.6), 0 0 30px rgba(34, 211, 238, 0.3); }
+}
+
+/* Gradient Shift */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Scanline Effect */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Rotate Slow */
+@keyframes rotate-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Data Flow */
+@keyframes data-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* Bounce In */
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Slide In Up */
+@keyframes slide-in-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide In Down */
+@keyframes slide-in-down {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide In Left */
+@keyframes slide-in-left {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide In Right */
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Fade In */
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Scale Pulse */
+@keyframes scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Utility Classes */
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -36,7 +122,93 @@ body {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Gradient Text */
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 1000px 100%;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-scanline {
+  animation: scanline 3s linear infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+.animate-data-flow {
+  animation: data-flow 20s linear infinite;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.6s ease-out;
+}
+
+.animate-slide-in-down {
+  animation: slide-in-down 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   GLASSMORPHISM EFFECTS
+   ============================================ */
+
+.glassmorphism {
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(100, 200, 255, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glassmorphism-light {
+  background-color: rgba(100, 200, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(100, 200, 255, 0.2);
+}
+
+.glassmorphism-glow {
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(100, 200, 255, 0.3);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.2), inset 0 0 20px rgba(14, 165, 233, 0.1);
+}
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
 .bg-gradient-to-r {
   background: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -66,7 +238,10 @@ body {
   color: transparent;
 }
 
-/* Glass Effect */
+/* ============================================
+   GLASS EFFECT & BACKDROP
+   ============================================ */
+
 .backdrop-blur-xl {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -86,7 +261,10 @@ body {
   --tw-gradient-to: transparent;
 }
 
-/* Custom Scrollbar */
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -105,27 +283,169 @@ body {
   background: #444;
 }
 
-/* Selection */
+/* ============================================
+   SELECTION & FOCUS
+   ============================================ */
+
 ::selection {
   background: rgb(14 165 233 / 0.3);
   color: white;
 }
 
-/* Focus Ring */
 *:focus-visible {
   outline: 2px solid rgb(14 165 233);
   outline-offset: 2px;
 }
 
-/* Smooth Scrolling */
+/* ============================================
+   SMOOTH SCROLLING
+   ============================================ */
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Background Pattern */
+/* ============================================
+   BACKGROUND PATTERNS
+   ============================================ */
+
 .bg-grid-pattern {
   background-image: 
     linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 50px 50px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(circle, rgba(100, 200, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ============================================
+   NEON & LED EFFECTS
+   ============================================ */
+
+.neon-glow {
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+.neon-glow-hover:hover {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.8), 0 0 40px rgba(34, 211, 238, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-border {
+  border: 1px solid rgba(14, 165, 233, 0.5);
+  box-shadow: inset 0 0 10px rgba(14, 165, 233, 0.1);
+}
+
+/* ============================================
+   HOVER EFFECTS
+   ============================================ */
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+}
+
+/* ============================================
+   TEXT EFFECTS
+   ============================================ */
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(34, 211, 238, 0.3);
+}
+
+.text-glow-hover:hover {
+  text-shadow: 0 0 20px rgba(14, 165, 233, 0.8), 0 0 30px rgba(34, 211, 238, 0.5);
+  transition: text-shadow 0.3s ease;
+}
+
+/* ============================================
+   BORDER ANIMATIONS
+   ============================================ */
+
+.animated-border {
+  position: relative;
+  border: 2px solid transparent;
+  background-image: 
+    linear-gradient(#000, #000),
+    linear-gradient(90deg, #0ea5e9, #22d3ee, #0ea5e9);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* ============================================
+   BENTO GRID EFFECTS
+   ============================================ */
+
+.bento-card {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid rgba(100, 200, 255, 0.1);
+}
+
+.bento-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(100, 200, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+}
+
+/* ============================================
+   PARALLAX EFFECT
+   ============================================ */
+
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* ============================================
+   STAGGER ANIMATION DELAYS
+   ============================================ */
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+.stagger-9 { animation-delay: 0.9s; }
+.stagger-10 { animation-delay: 1s; }
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+
+html {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="3" fill="%230ea5e9"/><circle cx="16" cy="16" r="8" fill="none" stroke="%230ea5e9" stroke-width="1" opacity="0.5"/></svg>') 16 16, auto;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+  
+  .bento-card:hover {
+    transform: translateY(-4px);
+  }
 }
