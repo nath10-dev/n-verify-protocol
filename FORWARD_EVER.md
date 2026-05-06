@@ -1,3 +1,0 @@
-# N-Verify
-
-Forward ever!

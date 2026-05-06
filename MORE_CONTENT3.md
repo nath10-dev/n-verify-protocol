@@ -1,3 +1,0 @@
-# More Content
-
-## Always building!

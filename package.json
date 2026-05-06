@@ -1,24 +1,13 @@
-# n-verify-protocol
-
-Decentralized AI verification layer built with Next.js, Node.js, and Solidity.
-
-## Quick Start
-
-```bash
-# Install
-npm install
-
-# Development
-npm run dev
-
-# Build
-npm run build
-```
-
-## Documentation
-
-See the main README.md for full documentation.
-
-## License
-
-MIT
+{
+  "name": "n-verify-protocol-root",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=frontend"
+  }
+}

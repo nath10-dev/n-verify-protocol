@@ -1,3 +1,0 @@
-# GM
-
-## Status: Waiting!

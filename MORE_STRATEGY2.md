@@ -1,3 +1,0 @@
-# More Strategy
-
-## Always strategizing!

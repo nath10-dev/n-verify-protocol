@@ -1,3 +1,0 @@
-# Ready
-
-## Always!

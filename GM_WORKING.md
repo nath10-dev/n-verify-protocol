@@ -1,3 +1,0 @@
-# GM!
-
-## Always working!

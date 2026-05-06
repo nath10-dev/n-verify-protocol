@@ -1,3 +1,0 @@
-# More Ideas
-
-## Always thinking!
